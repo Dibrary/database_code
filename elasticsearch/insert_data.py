@@ -1,6 +1,7 @@
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, helpers
 
-es = Elasticsearch("http://192.168.56.113:9200/")
+
+es = Elasticsearch({'192.168.56.113:9200/'})
 
 def make_index(es, index_name):
     if es.indices.exists(index = index_name):
@@ -17,3 +18,12 @@ doc2 = {'goods_name':'냉장고', 'price':150000}
 es.index(index=index_name, doc_type='string', body=doc1)
 es.index(index=index_name, doc_type='string', body=doc2)
 es.indices.refresh(index=index_name)
+
+
+
+
+
+doc = {"name":fake.name(), "street":fake.street_address(), "city":fake.city(),
+       "zip":fake.zipcode()}
+res = es.index(index="users", doc_type="doc",body=doc)
+print(res['result'])
