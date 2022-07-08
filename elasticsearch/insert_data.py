@@ -1,7 +1,9 @@
 from elasticsearch import Elasticsearch, helpers
+from faker import Faker
 
+fake = Faker()
 
-es = Elasticsearch({'192.168.56.113:9200/'})
+es = Elasticsearch(['http://192.168.56.111:9200'])
 
 def make_index(es, index_name):
     if es.indices.exists(index = index_name):
@@ -18,6 +20,8 @@ doc2 = {'goods_name':'냉장고', 'price':150000}
 es.index(index=index_name, doc_type='string', body=doc1)
 es.index(index=index_name, doc_type='string', body=doc2)
 es.indices.refresh(index=index_name)
+
+# created 나오면 정상으로 입력된 것이다.
 
 
 
