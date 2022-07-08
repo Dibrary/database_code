@@ -10,5 +10,11 @@ for k in res['hits']['hits']:
     print(k)
 
 # print(res['hits']['hits'])
+print("=============================================")
 
+from pandas.io.json import json_normalize
+df = json_normalize(res['hits']['hits'])
+doc = {"query":{"match":{"name":"James Hoffman"}}}
+res = es.search(index="users", body=doc, size=10)
+print(res['hits']['hits'][0]['_source'])
 
